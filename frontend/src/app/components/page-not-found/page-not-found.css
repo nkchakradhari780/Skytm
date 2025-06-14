@@ -1,0 +1,21 @@
+ body {
+      background-color: #0d1117;
+      color: #c9d1d9;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .error-code {
+      font-size: 10rem;
+      font-weight: bold;
+      color: #f85149;
+    }
+    .error-message {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .btn-custom {
+      background-color: #238636;
+      color: white;
+    }
+    .btn-custom:hover {
+      background-color: #2ea043;
+    }

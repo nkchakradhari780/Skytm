@@ -1,0 +1,19 @@
+.form-label {
+  color: #ddd; /* Lighter gray for visibility */
+}
+
+.form-control::placeholder {
+  color: #aaa !important; /* Make placeholders more visible on dark input */
+}
+
+.card {
+  background-color: #f8f9fa; /* Light card */
+}
+
+.text-white {
+  color: #000 !important; /* Make card text black for contrast */
+}
+
+.container{
+    background-color: #121212;
+}

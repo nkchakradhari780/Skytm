@@ -1,0 +1,28 @@
+<div class="conteiner bg-dark text-light">
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <app-sidebar />
+    <!-- Main Content -->
+    <div class="flex-grow-1">
+      <!-- Header -->
+      <app-header />
+      <main class="p-4">
+
+        <!-- Latest Transactions -->
+        <app-transaction-table />
+
+        <!-- Weekly Graph (Placeholder) -->
+        <div class="card bg-dark text-light p-3 border border-secondary">
+          <h5>Weekly Member Joinings</h5>
+          <div style="height: 200px;" class="d-flex align-items-center justify-content-center text-muted">
+            [Graph Placeholder]
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <app-footer />
+    </div>
+  </div>
+
+</div>
