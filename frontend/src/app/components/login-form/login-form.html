@@ -1,20 +1,60 @@
-<div class=" d-flex justify-content-center align-items-center min-vh-100">
-  <div class="card text-white border-secondary w-100" style="max-width: 420px; box-shadow: 0 0 20px rgb(0, 0, 0);">
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+  <div
+    class="card text-black border-secondary w-100"
+    style="max-width: 420px; box-shadow: 0 0 20px rgb(0, 0, 0)"
+  >
     <div class="card-body p-4">
       <h2 class="text-center mb-4">Welcome Back</h2>
-      <form>
+
+      <form
+        #loginUserForm="ngForm"
+        (ngSubmit)="loginUserForm.form.valid && onSubmit()"
+        novalidate
+      >
+        <!-- Email Field -->
         <div class="mb-3">
-          <label for="email" class="form-label text-dark">Email address</label>
-          <input type="email" class="form-control bg-dark text-white" id="email" placeholder="name@example.com">
+          <label for="email" class="form-label text-white">Email address</label>
+          <input
+            type="email"
+            class="form-control bg-dark text-white"
+            id="email"
+            name="email"
+            [(ngModel)]="loginUserModel.email"
+            required
+            #email="ngModel"
+            [ngClass]="{ 'is-invalid': loginUserForm.submitted && email.invalid }"
+            placeholder="name@example.com"
+          />
+          <div class="text-danger" *ngIf="loginUserForm.submitted && email.invalid">
+            Email is required.
+          </div>
         </div>
+
+        <!-- Password Field -->
         <div class="mb-3">
           <label for="password" class="form-label text-dark">Password</label>
-          <input type="password" class="form-control bg-dark text-white" id="password" placeholder="••••••••">
+          <input
+            type="password"
+            class="form-control bg-dark text-white"
+            id="password"
+            name="password"
+            [(ngModel)]="loginUserModel.password"
+            required
+            #password="ngModel"
+            [ngClass]="{ 'is-invalid': loginUserForm.submitted && password.invalid }"
+            placeholder="••••••••"
+          />
+          <div class="text-danger" *ngIf="loginUserForm.submitted && password.invalid">
+            Password is required.
+          </div>
         </div>
+
         <button type="submit" class="btn btn-primary w-100">Login</button>
       </form>
+
       <div class="text-center mt-3">
-        <small>Don’t have an account?
+        <small>
+          Don’t have an account?
           <a href="/SignupPage" class="text-primary text-decoration-none">Signup</a>
         </small>
       </div>

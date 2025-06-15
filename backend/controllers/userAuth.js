@@ -9,7 +9,10 @@ module.exports.createUser = async (req, res) => {
 
     let user = await userModel.findOne({ email });
     console.log("User:", user);
-    if (user) return res.status(401).send("User Already Exists");
+    if (user)
+      return res
+        .status(401)
+        .send({ success: false, message: "User Already Exists" });
 
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(password, salt, async (err, hash) => {
@@ -24,19 +27,18 @@ module.exports.createUser = async (req, res) => {
             imageUrl,
             isAdmin,
           });
-          console.log("Owner Created:", user);
-          res.status(200).send("Owner Created");
+          console.log("User Created:", user);
+          res.status(200).send({ success: true, message: "User Created" });
         }
       });
     });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Internal Server Error");
+    res.status(500).send({ success: false, messge: "Internal Server error" });
   }
 };
 
 module.exports.loginUser = async (req, res) => {
-  console.log("method:;", req.method);
   if (req.method === "POST") {
     try {
       const { email, password } = req.body;
@@ -50,7 +52,12 @@ module.exports.loginUser = async (req, res) => {
 
       bcrypt.compare(password, user.password, (err, result) => {
         if (err) {
-          return res.status(500).send("Internal Server Error while LoginIn");
+          return res
+            .status(500)
+            .send({
+              success: false,
+              message: "Internal Server Error while LoginIn",
+            });
         }
         if (result) {
           const token = jwt.sign(
@@ -68,12 +75,10 @@ module.exports.loginUser = async (req, res) => {
             .status(200)
             .json({ success: true, message: "LoggedIn Successfully" });
         } else {
-          return res
-            .status(401)
-            .json({
-              success: false,
-              message: "Email or password is incorrect",
-            });
+          return res.status(401).json({
+            success: false,
+            message: "Email or password is incorrect",
+          });
         }
       });
     } catch (err) {

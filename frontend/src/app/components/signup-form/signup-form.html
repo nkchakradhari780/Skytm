@@ -1,31 +1,163 @@
-<div class=" d-flex justify-content-center align-items-center min-vh-100">
- <div class="card text-white border-secondary w-100" style="max-width: 420px; box-shadow: 0 0 20px rgb(0, 0, 0);">
-
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+  <div
+    class="hei card text-white border-secondary w-100"
+    style="max-width: 420px; box-shadow: 0 0 20px rgb(0, 0, 0)"
+  >
     <div class="card-body p-4">
-      <h2 class="text-center mb-4">Sign Up</h2>
-      <form>
-        <div class="mb-3">
+      <h2 class="text-center mb-2 text-black">Sign Up</h2>
+
+      <form
+        #signupUserForm="ngForm"
+        (ngSubmit)="signupUserForm.form.valid && onSubmit()"
+        novalidate
+      >
+        <!-- Full Name -->
+        <div class="mb-1">
           <label for="fullName" class="form-label text-dark">Full Name</label>
-          <input type="text" class="form-control bg-dark text-white" id="fullName" placeholder="Enter your full name" />
+          <input
+            type="text"
+            class="form-control bg-dark text-white"
+            id="fullName"
+            name="fullName"
+            [(ngModel)]="addUserModel.fullName"
+            required
+            #fullName="ngModel"
+            [ngClass]="{'is-invalid': signupUserForm.submitted && fullName.invalid}"
+            placeholder="Enter your full name"
+          />
+          <div
+            class="text-danger"
+            *ngIf="signupUserForm.submitted && fullName.invalid"
+          >
+            Full Name is required.
+          </div>
         </div>
-        <div class="mb-3">
+
+        <!-- Email -->
+        <div class="mb-1">
           <label for="email" class="form-label text-dark">Email address</label>
-          <input type="email" class="form-control bg-dark text-white" id="email" placeholder="Enter email" />
+          <input
+            type="email"
+            class="form-control bg-dark text-white"
+            id="email"
+            name="email"
+            [(ngModel)]="addUserModel.email"
+            required
+            email
+            #email="ngModel"
+            [ngClass]="{'is-invalid': signupUserForm.submitted && email.invalid}"
+            placeholder="Enter email"
+          />
+          <div
+            class="text-danger"
+            *ngIf="signupUserForm.submitted && email.invalid"
+          >
+            Valid Email is required.
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="password" class="form-labe text-dark">Password</label>
-          <input type="password" class="form-control bg-dark text-white" id="password" placeholder="Password" />
+
+        <!-- Phone Number -->
+        <div class="mb-1">
+          <label for="phoneNumber" class="form-label text-dark"
+            >Phone Number</label
+          >
+          <input
+            type="number"
+            class="form-control bg-dark text-white"
+            id="phoneNumber"
+            name="phoneNumber"
+            [(ngModel)]="addUserModel.phoneNumber"
+            required
+            #phoneNumber="ngModel"
+            [ngClass]="{'is-invalid': signupUserForm.submitted && phoneNumber.invalid}"
+            placeholder="Enter phone number"
+          />
+          <div
+            class="text-danger"
+            *ngIf="signupUserForm.submitted && phoneNumber.invalid"
+          >
+            Phone Number is required.
+          </div>
         </div>
-        <div class="mb-3">
-          <label for="confirmPassword" class="form-label text-dark">Confirm Password</label>
-          <input type="password" class="form-control bg-dark text-white" id="confirmPassword" placeholder="Confirm Password" />
+
+        
+        <!-- Gender -->
+        <div class="mb-1">
+          <label for="gender" class="form-label text-dark">Gender</label>
+          <select
+            class="form-control bg-dark text-white"
+            id="gender"
+            name="gender"
+            [(ngModel)]="addUserModel.gender"
+            required
+            #gender="ngModel"
+            [ngClass]="{'is-invalid': signupUserForm.submitted && gender.invalid}"
+          >
+            <option value="" disabled selected>Select gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+          <div class="text-danger" *ngIf="signupUserForm.submitted && gender.invalid">
+            Gender is required.
+          </div>
         </div>
+
+        <!-- Password -->
+        <div class="mb-1">
+          <label for="password" class="form-label text-dark">Password</label>
+          <input
+            type="password"
+            class="form-control bg-dark text-white"
+            id="password"
+            name="password"
+            [(ngModel)]="addUserModel.password"
+            required
+            minlength="6"
+            #password="ngModel"
+            [ngClass]="{'is-invalid': signupUserForm.submitted && password.invalid}"
+            placeholder="Password"
+          />
+          <div
+            class="text-danger"
+            *ngIf="signupUserForm.submitted && password.invalid"
+          >
+            Password must be at least 6 characters.
+          </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="mb-2">
+          <label for="confirmPassword" class="form-label text-dark"
+            >Confirm Password</label
+          >
+          <input
+            type="password"
+            class="form-control bg-dark text-white"
+            id="confirmPassword"
+            name="confirmPassword"
+            [(ngModel)]="addUserModel.confirmPassword"
+            required
+            #confirmPassword="ngModel"
+            [ngClass]="{'is-invalid': signupUserForm.submitted && confirmPassword.invalid}"
+            placeholder="Confirm Password"
+          />
+          <div
+            class="text-danger"
+            *ngIf="signupUserForm.submitted && confirmPassword.invalid"
+          >
+            Confirm Password is required.
+          </div>
+        </div>
+ 
         <button type="submit" class="btn btn-primary w-100">Sign Up</button>
       </form>
-      <div class="text-center mt-3">
-        <small>Allready have an Account?
-          <a href="/" class="text-primary text-decoration-none">LogIn</a>
-        </small>
+
+      <div class="text-center mt-3 text-black">
+        <small
+          >Already have an account?
+          <a href="/" class="text-primary text-decoration-none">LogIn</a></small
+        >
       </div>
     </div>
   </div>

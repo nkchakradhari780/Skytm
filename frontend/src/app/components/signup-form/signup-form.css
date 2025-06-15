@@ -10,8 +10,8 @@
   background-color: #f8f9fa; /* Light card */
 }
 
-.text-white {
-  color: #000 !important; /* Make card text black for contrast */
+.txt-white {
+  color: #ffffff !important; /* Make card text black for contrast */
 }
 
 .container{
