@@ -1,33 +1,35 @@
 import { Component } from '@angular/core';
-import { UserServices } from '../../services/user-services';
+import { AddUser, UserServices } from '../../services/user-services';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
    standalone: true,    
   selector: 'app-signup-form',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule, RouterModule],
   templateUrl: './signup-form.html',
   styleUrls: ['./signup-form.css'],
 })
 export class SignupForm {
 
-  addUserModel: any = {};
+  addUserModel: AddUser = new AddUser()
 
-  constructor(private userService: UserServices) { }
+  constructor(private userService: UserServices, private router: Router) { }
 
   data: any;
 
   onSubmit() {
-    if (this.addUserModel.password === this.addUserModel.confirmPassword) {
-      this.userService.signupUser(this.addUserModel).subscribe({
-        next: (response) => {
-          this.data = response;
-          alert("User Added successfully" + this.data);
-        },
-        error: (err) => {
-          console.log('error adding user:', err);
-          alert("faild to add user:");
+    if (true) {
+      this.userService.signupUser(this.addUserModel).subscribe((data) => {
+        if(data.response === "Registered Successfully !!"){
+          localStorage.setItem("userData",JSON.stringify(data.result));
+          this.data = data.result;
+          this.router.navigate(['/Dashboard',data.result.userId])
+          console.log("Successful")
+        }
+        else {
+          alert(data.response)
         }
       })
     }

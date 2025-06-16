@@ -8,6 +8,7 @@ export const routes: Routes = [
     { path: '', redirectTo: '/LoginPage', pathMatch: 'full' },
     { path: 'LoginPage', component: LoginForm },
     { path: 'SignupPage', component: SignupForm },
-    { path: 'Dashboard', component: Dashboard },
+    // { path: 'Dashboard', component: Dashboard },
+    { path: 'Dashboard/:id', component: Dashboard },
     { path: '**', component: PageNotFound }
 ];

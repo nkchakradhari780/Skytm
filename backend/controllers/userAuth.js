@@ -28,7 +28,7 @@ module.exports.createUser = async (req, res) => {
             isAdmin,
           });
           console.log("User Created:", user);
-          res.status(200).send({ success: true, message: "User Created" });
+          res.status(200).send({ success: true, message: "User Created", userId: user._id});
         }
       });
     });
@@ -73,7 +73,7 @@ module.exports.loginUser = async (req, res) => {
 
           return res
             .status(200)
-            .json({ success: true, message: "LoggedIn Successfully" });
+            .json({ success: true, message: "LoggedIn Successfully",userId: user._id});
         } else {
           return res.status(401).json({
             success: false,
@@ -86,7 +86,6 @@ module.exports.loginUser = async (req, res) => {
       res.status(401).json({ success: true, message: "Internal Server Error" });
     }
   } else {
-    console.log("method", req.method);
     res.status(405).json({ success: false, message: "Method not allowed" });
   }
 };

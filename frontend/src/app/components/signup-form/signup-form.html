@@ -19,7 +19,7 @@
             class="form-control bg-dark text-white"
             id="fullName"
             name="fullName"
-            [(ngModel)]="addUserModel.fullName"
+            [(ngModel)]="addUserModel.username"
             required
             #fullName="ngModel"
             [ngClass]="{'is-invalid': signupUserForm.submitted && fullName.invalid}"
@@ -62,7 +62,7 @@
             >Phone Number</label
           >
           <input
-            type="number"
+            type="string"
             class="form-control bg-dark text-white"
             id="phoneNumber"
             name="phoneNumber"
@@ -126,21 +126,21 @@
           </div>
         </div>
 
-        <!-- Confirm Password -->
+        <!-- ImageUrl -->
         <div class="mb-2">
           <label for="confirmPassword" class="form-label text-dark"
-            >Confirm Password</label
+            >ImageUrl</label
           >
           <input
-            type="password"
+            type="text"
             class="form-control bg-dark text-white"
-            id="confirmPassword"
-            name="confirmPassword"
-            [(ngModel)]="addUserModel.confirmPassword"
+            id="imageUrl"
+            name="imageUrl"
+            [(ngModel)]="addUserModel.imageUrl"
             required
             #confirmPassword="ngModel"
             [ngClass]="{'is-invalid': signupUserForm.submitted && confirmPassword.invalid}"
-            placeholder="Confirm Password"
+            placeholder="imageUrl"
           />
           <div
             class="text-danger"
@@ -154,10 +154,10 @@
       </form>
 
       <div class="text-center mt-3 text-black">
-        <small
-          >Already have an account?
-          <a href="/" class="text-primary text-decoration-none">LogIn</a></small
-        >
+        <small>
+          Already have an account?
+          <a routerLink="/LoginPage" class="text-primary text-decoration-none">LogIn</a>
+        </small>
       </div>
     </div>
   </div>

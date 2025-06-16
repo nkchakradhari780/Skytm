@@ -11,22 +11,22 @@
         (ngSubmit)="loginUserForm.form.valid && onSubmit()"
         novalidate
       >
-        <!-- Email Field -->
+        <!-- Phone Number -->
         <div class="mb-3">
-          <label for="email" class="form-label text-white">Email address</label>
+          <label for="phoneNumber" class="form-label text-white">Phone Number</label>
           <input
-            type="email"
+            type="text"
             class="form-control bg-dark text-white"
-            id="email"
-            name="email"
-            [(ngModel)]="loginUserModel.email"
+            id="phoneNumber"
+            name="phoneNumber"
+            [(ngModel)]="loginUserModel.phoneNumber"
             required
-            #email="ngModel"
-            [ngClass]="{ 'is-invalid': loginUserForm.submitted && email.invalid }"
-            placeholder="name@example.com"
+            #phoneNumber="ngModel"
+            [ngClass]="{ 'is-invalid': loginUserForm.submitted && phoneNumber.invalid }"
+            placeholder="phoneNumber"
           />
-          <div class="text-danger" *ngIf="loginUserForm.submitted && email.invalid">
-            Email is required.
+          <div class="text-danger" *ngIf="loginUserForm.submitted && phoneNumber.invalid">
+            phoneNumber is required.
           </div>
         </div>
 
@@ -55,7 +55,7 @@
       <div class="text-center mt-3">
         <small>
           Don’t have an account?
-          <a href="/SignupPage" class="text-primary text-decoration-none">Signup</a>
+          <a routerLink="/SignupPage" class="text-primary text-decoration-none">Signup</a>
         </small>
       </div>
     </div>

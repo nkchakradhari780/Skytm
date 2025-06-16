@@ -1,0 +1,40 @@
+<form #addToWallet="ngForm"
+    (ngSubmit)="onSubmit()"
+    novalidate
+>
+<!-- Full Name -->
+        <div class="mb-1">
+          <label for="fullName" class="form-label text-dark">PhoneNumber</label>
+          <input
+            type="text"
+            class="form-control bg-dark text-white"
+            id="phoneNumber"
+            name="phoneNumber"
+            [(ngModel)]="addMoneyModel.phoneNumber"
+            required
+            #phoneNumber="ngModel"
+            [ngClass]="{'is-invalid': addToWallet.submitted && phoneNumber.invalid}"
+            placeholder="Enter your full name"
+          />
+        </div>
+
+        <!-- Email -->
+        <div class="mb-1">
+          <label for="email" class="form-label text-dark">Amount</label>
+          <input
+            type="number"
+            class="form-control bg-dark text-white"
+            id="number"
+            name="number"
+            [(ngModel)]="addMoneyModel.amount"
+            required
+            email
+            #amount="ngModel"
+            [ngClass]="{'is-invalid': addMoneyModel.submitted && amount.invalid}"
+            placeholder="Enter email"
+          />
+          
+        </div>
+        
+        <button type="submit" class="btn btn-primary w-100">Add to Wallet</button>
+</form>
