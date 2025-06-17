@@ -1,11 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [],
   templateUrl: './sidebar.html',
-  styleUrl: './sidebar.css'
+  imports: [RouterLink],
+  styleUrls: ['./sidebar.css']
 })
-export class Sidebar {
+export class Sidebar implements OnInit {
+  userData: any;
 
+  ngOnInit(): void {
+    const data = sessionStorage.getItem("userData");
+    this.userData = data ? JSON.parse(data) : null;
+    console.log(this.userData);
+  }
 }

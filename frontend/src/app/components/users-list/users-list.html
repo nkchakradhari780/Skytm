@@ -1,0 +1,29 @@
+<div class="table-responsive tab">
+  <table class="table table-dark table-hover table-bordered mb-0">
+    <thead class="table-secondary text-dark">
+      <tr>
+        <th scope="col">User ID</th>
+        <th scope="col">Username</th>
+        <th scope="col">Phone Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.userId }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.phoneNumber }}</td>
+      </tr>
+
+      <tr *ngIf="users.length === 0">
+        <td colspan="3" class="text-center text-warning">No Users Found</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+
+
+

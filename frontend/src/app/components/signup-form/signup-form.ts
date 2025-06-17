@@ -20,13 +20,12 @@ export class SignupForm {
   data: any;
 
   onSubmit() {
-    if (true) {
+    if (this.addUserModel.password === this.addUserModel.confirmPassword) {
       this.userService.signupUser(this.addUserModel).subscribe((data) => {
         if(data.response === "Registered Successfully !!"){
-          localStorage.setItem("userData",JSON.stringify(data.result));
+          sessionStorage.setItem("userData",JSON.stringify(data.result));
           this.data = data.result;
           this.router.navigate(['/Dashboard',data.result.userId])
-          console.log("Successful")
         }
         else {
           alert(data.response)

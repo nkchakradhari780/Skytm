@@ -1,40 +1,29 @@
-<form #addToWallet="ngForm"
-    (ngSubmit)="onSubmit()"
-    novalidate
->
-<!-- Full Name -->
-        <div class="mb-1">
-          <label for="fullName" class="form-label text-dark">PhoneNumber</label>
-          <input
-            type="text"
-            class="form-control bg-dark text-white"
-            id="phoneNumber"
-            name="phoneNumber"
-            [(ngModel)]="addMoneyModel.phoneNumber"
-            required
-            #phoneNumber="ngModel"
-            [ngClass]="{'is-invalid': addToWallet.submitted && phoneNumber.invalid}"
-            placeholder="Enter your full name"
-          />
-        </div>
+<app-wallet-balance />
 
-        <!-- Email -->
-        <div class="mb-1">
-          <label for="email" class="form-label text-dark">Amount</label>
+<div class="container d-flex justify-content-center align-items-center bg-dark">
+  <div class="card text-white bg-dark shadow" style="max-width: 400px; width: 100%;">
+    <div class="card-body">
+      <h4 class="card-title text-center mb-3">Enter Amount</h4>
+      <form #amountForm="ngForm" (ngSubmit)="amountForm.form.valid && onSubmit()" novalidate>
+        <div class="mb-3">
+          <label for="amount" class="form-label">Amount</label>
           <input
             type="number"
+            id="amount"
+            name="amount"
             class="form-control bg-dark text-white"
-            id="number"
-            name="number"
             [(ngModel)]="addMoneyModel.amount"
             required
-            email
             #amount="ngModel"
-            [ngClass]="{'is-invalid': addMoneyModel.submitted && amount.invalid}"
-            placeholder="Enter email"
+            placeholder="Enter amount"
+            [ngClass]="{'is-invalid': amountForm.submitted && amount.invalid}"
           />
-          
+          <div class="text-danger" *ngIf="amountForm.submitted && amount.invalid">
+            Amount is required.
+          </div>
         </div>
-        
-        <button type="submit" class="btn btn-primary w-100">Add to Wallet</button>
-</form>
+        <button type="submit" class="btn btn-primary w-100">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

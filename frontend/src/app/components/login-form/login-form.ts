@@ -18,11 +18,9 @@ export class LoginForm {
   data: any;
 
   onSubmit() {
-    
     this.userService.loginUser(this.loginUserModel).subscribe({
       next: (response: any) => {
         const userId = response.result.userId;
-
         console.log("User LoggedIn Successfully: " , userId)
         sessionStorage.setItem("userData",JSON.stringify(response.result));
         this.router.navigate(['/Dashboard',userId])

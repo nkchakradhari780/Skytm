@@ -80,7 +80,6 @@
           </div>
         </div>
 
-        
         <!-- Gender -->
         <div class="mb-1">
           <label for="gender" class="form-label text-dark">Gender</label>
@@ -98,7 +97,10 @@
             <option value="Female">Female</option>
             <option value="Other">Other</option>
           </select>
-          <div class="text-danger" *ngIf="signupUserForm.submitted && gender.invalid">
+          <div
+            class="text-danger"
+            *ngIf="signupUserForm.submitted && gender.invalid"
+          >
             Gender is required.
           </div>
         </div>
@@ -126,6 +128,37 @@
           </div>
         </div>
 
+        <!-- Confirm Password -->
+        <div class="mb-2">
+          <label for="confirmPassword" class="form-label text-dark"
+            >Confirm Password</label
+          >
+          <input
+            type="password"
+            class="form-control bg-dark text-white"
+            id="confirmPassword"
+            name="confirmPassword"
+            [(ngModel)]="addUserModel.confirmPassword"
+            required
+            #confirmPassword="ngModel"
+            [ngClass]="{
+      'is-invalid': 
+        signupUserForm.submitted &&
+        (confirmPassword.invalid || addUserModel.password !== addUserModel.confirmPassword)
+    }"
+            placeholder="Confirm Password"
+          />
+          <div
+            class="text-danger"
+            *ngIf="
+      signupUserForm.submitted && 
+      (confirmPassword.invalid || addUserModel.password !== addUserModel.confirmPassword)
+    "
+          >
+            Confirm Password is required and must match Password.
+          </div>
+        </div>
+
         <!-- ImageUrl -->
         <div class="mb-2">
           <label for="confirmPassword" class="form-label text-dark"
@@ -146,17 +179,19 @@
             class="text-danger"
             *ngIf="signupUserForm.submitted && confirmPassword.invalid"
           >
-            Confirm Password is required.
+            Image URL is required.
           </div>
         </div>
- 
+
         <button type="submit" class="btn btn-primary w-100">Sign Up</button>
       </form>
 
       <div class="text-center mt-3 text-black">
         <small>
           Already have an account?
-          <a routerLink="/LoginPage" class="text-primary text-decoration-none">LogIn</a>
+          <a routerLink="/LoginPage" class="text-primary text-decoration-none"
+            >LogIn</a
+          >
         </small>
       </div>
     </div>

@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class UserServices {
 
+  public walletAmount!: number;
+
   constructor(private http: HttpClient) { }
 
   signupUser(data: AddUser): Observable<Response> {
@@ -20,6 +22,38 @@ export class UserServices {
   addToWallet(data: Tmodel): Observable<Tresponse> {
     return this.http.post<Tresponse>('https://skytm-api.azurewebsites.net/api/Wallet/add', data)
   }
+
+  sendMoney(data: SendMoneyModel): Observable<Response> {
+    return this.http.post<Response>('https://skytm-api.azurewebsites.net/api/Transactions/pay', data)
+  }
+
+  getTransactions(data: string): Observable<TransactionsResponse> {
+    return this.http.get<TransactionsResponse>('https://skytm-api.azurewebsites.net/api/Transactions/history', {
+      params: { phoneNumber: data }
+    });
+  }
+
+  deleteAllTransactions(data: string): Observable<TransactionsResponse> {
+    return this.http.delete<TransactionsResponse>('https://skytm-api.azurewebsites.net/api/Transactions/history', {
+      params: { phoneNumber: data }
+    });
+  } 
+
+  deleteTransaction(data: number): Observable<TransactionsResponse> {
+    return this.http.delete<TransactionsResponse>('https://skytm-api.azurewebsites.net/api/Transactions/DeleteTransectionById',{
+      params: {tid: data}
+    })
+  }
+
+  getWalletBalance(data: number): Observable<Response> {
+    return this.http.get<Response>('https://skytm-api.azurewebsites.net/api/Users/balance',{
+      params: {phoneNumber: data}
+    })
+  }
+
+  getUserBasicList(): Observable<UserBasicListResponse> {
+    return this.http.get<UserBasicListResponse>('https://skytm-api.azurewebsites.net/api/Users/basic-list')
+  }
 }
 
 export class AddUser {
@@ -28,6 +62,7 @@ export class AddUser {
   phoneNumber!: string;
   gender?: 'Male' | 'Female' | 'Other';
   password!: string;
+  confirmPassword!: string;
   imageUrl!: 'Myimage';
   isAdmin: boolean = false;
 }
@@ -64,4 +99,36 @@ export class Tmodel {
   phoneNumber!: string;
   amount!: number;
   submitted: any;
+}
+
+export class SendMoneyModel {
+  senderPhoneNumber!: string;
+  receiverPhoneNumber!: string;
+  amount!: number;
+}
+
+export class TransactionsResponse {
+  result!: Array<{
+    transactionId: number;
+    userId: number;
+    receiverId: number;
+    receiverName: string;
+    receiverPhoneNumber: string;
+    transactionType: string;
+    transactionDate: string;
+    initialAmount: number;
+    transferAmount: number;
+  }>;
+  response!: string;
+  responseCode!: string;
+}
+
+export class UserBasicListResponse {
+  result!: Array<{
+    userId: number;
+    username: string;
+    phoneNumber: string;
+  }>
+  response!: string;
+  responseCode!: string;
 }

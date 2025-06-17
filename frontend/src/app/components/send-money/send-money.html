@@ -1,0 +1,68 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100 bg-dark">
+  <div class="card text-white bg-dark shadow" style="max-width: 450px; width: 100%;">
+    <div class="card-body">
+      <h4 class="card-title text-center mb-3">Send Money</h4>
+
+      <form #sendMoneyForm="ngForm" (ngSubmit)="sendMoneyForm.valid && onSubmit()" novalidate>
+        <!-- Sender Phone Number -->
+        <div class="mb-3">
+          <label for="senderPhoneNumber" class="form-label">Sender Phone Number</label>
+          <input
+            type="text"
+            class="form-control bg-dark text-white"
+            id="senderPhoneNumber"
+            name="senderPhoneNumber"
+            required
+            [(ngModel)]="sendMoneyModel.senderPhoneNumber"
+            #senderPhoneNumber="ngModel"
+            placeholder="Enter sender's phone number"
+            [ngClass]="{'is-invalid': sendMoneyForm.submitted && senderPhoneNumber.invalid}"
+          />
+          <div class="text-danger" *ngIf="sendMoneyForm.submitted && senderPhoneNumber.invalid">
+            Sender phone number is required.
+          </div>
+        </div>
+
+        <!-- Receiver Phone Number -->
+        <div class="mb-3">
+          <label for="receiverPhoneNumber" class="form-label">Receiver Phone Number</label>
+          <input
+            type="text"
+            class="form-control bg-dark text-white"
+            id="receiverPhoneNumber"
+            name="receiverPhoneNumber"
+            required
+            [(ngModel)]="sendMoneyModel.receiverPhoneNumber"
+            #receiverPhoneNumber="ngModel"
+            placeholder="Enter receiver's phone number"
+            [ngClass]="{'is-invalid': sendMoneyForm.submitted && receiverPhoneNumber.invalid}"
+          />
+          <div class="text-danger" *ngIf="sendMoneyForm.submitted && receiverPhoneNumber.invalid">
+            Receiver phone number is required.
+          </div>
+        </div>
+
+        <!-- Amount -->
+        <div class="mb-3">
+          <label for="amount" class="form-label">Amount</label>
+          <input
+            type="number"
+            class="form-control bg-dark text-white"
+            id="amount"
+            name="amount"
+            required
+            [(ngModel)]="sendMoneyModel.amount"
+            #amount="ngModel"
+            placeholder="Enter amount"
+            [ngClass]="{'is-invalid': sendMoneyForm.submitted && amount.invalid}"
+          />
+          <div class="text-danger" *ngIf="sendMoneyForm.submitted && amount.invalid">
+            Amount is required.
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Send</button>
+      </form>
+    </div>
+  </div>
+</div>
