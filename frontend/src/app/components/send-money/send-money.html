@@ -1,5 +1,5 @@
-<div class="container d-flex justify-content-center align-items-center min-vh-100 bg-dark">
-  <div class="card text-white bg-dark shadow" style="max-width: 450px; width: 100%;">
+<div class="container d-flex justify-content-center align-items-center height bg-dark">
+  <div class="card text-white bg-dark shadow " style="max-width: 450px; width: 100%;">
     <div class="card-body">
       <h4 class="card-title text-center mb-3">Send Money</h4>
 
@@ -17,6 +17,7 @@
             #senderPhoneNumber="ngModel"
             placeholder="Enter sender's phone number"
             [ngClass]="{'is-invalid': sendMoneyForm.submitted && senderPhoneNumber.invalid}"
+            disabled
           />
           <div class="text-danger" *ngIf="sendMoneyForm.submitted && senderPhoneNumber.invalid">
             Sender phone number is required.
@@ -26,9 +27,8 @@
         <!-- Receiver Phone Number -->
         <div class="mb-3">
           <label for="receiverPhoneNumber" class="form-label">Receiver Phone Number</label>
-          <input
-            type="text"
-            class="form-control bg-dark text-white"
+          <select
+            class="form-control bg-dark text-white scrollbar"
             id="receiverPhoneNumber"
             name="receiverPhoneNumber"
             required
@@ -36,7 +36,10 @@
             #receiverPhoneNumber="ngModel"
             placeholder="Enter receiver's phone number"
             [ngClass]="{'is-invalid': sendMoneyForm.submitted && receiverPhoneNumber.invalid}"
-          />
+          >
+            <option value="" disabled selected>Select Receiver</option>
+            <option *ngFor="let user of usersList" [value]="user.phoneNumber">{{user.phoneNumber}}</option>
+        </select>
           <div class="text-danger" *ngIf="sendMoneyForm.submitted && receiverPhoneNumber.invalid">
             Receiver phone number is required.
           </div>

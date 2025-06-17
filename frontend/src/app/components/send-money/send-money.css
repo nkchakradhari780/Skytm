@@ -1,0 +1,11 @@
+.scrollbar{
+scrollbar-width: none;         
+  -ms-overflow-style: none;
+}
+.scrollbar::-webkit-scrollbar {
+  display: none;               
+}
+
+.height{
+    height: 100%;
+}

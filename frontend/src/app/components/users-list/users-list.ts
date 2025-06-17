@@ -11,14 +11,14 @@ import { UserBasicListResponse, UserServices } from '../../services/user-service
 export class UsersList {
   constructor(private userService: UserServices) {}
 
-  users: any;
+  users: any[] = [];
 
   ngOnInit(): void {
     this.userService.getUserBasicList().subscribe(
       (response) => {
         if(response.response === "Balance fetched Successfully !!"){
           this.users = response.result;
-            console.log("History fetched successfully", this.users);
+            console.log("Users List fetched successfully", this.users);
           } else {
             alert("Error fetching UsersList: " + response.response);
         }
