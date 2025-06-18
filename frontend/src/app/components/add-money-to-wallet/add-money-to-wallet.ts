@@ -2,7 +2,6 @@ import { Component, DoCheck, OnInit } from '@angular/core';
 import { Tmodel, UserServices } from '../../services/user-services';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { escapeRegExp } from '@angular/compiler';
 import { WalletBalance } from "../wallet-balance/wallet-balance";
 
 @Component({
@@ -11,14 +10,14 @@ import { WalletBalance } from "../wallet-balance/wallet-balance";
   templateUrl: './add-money-to-wallet.html',
   styleUrl: './add-money-to-wallet.css'
 })
-export class AddMoneyToWallet implements OnInit{
+export class AddMoneyToWallet implements OnInit {
 
   addMoneyModel: Tmodel = new Tmodel();
 
   constructor(private userService: UserServices) { }
   amount!: number;
 
-  
+
   data: any;
   userData: any;
 

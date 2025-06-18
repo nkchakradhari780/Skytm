@@ -7,9 +7,9 @@ import { UserServices } from '../../services/user-services';
   templateUrl: './wallet-balance.html',
   styleUrl: './wallet-balance.css'
 })
-export class WalletBalance implements DoCheck{
+export class WalletBalance implements DoCheck {
 
-  constructor(private userService: UserServices) {}
+  constructor(private userService: UserServices) { }
   userData: any;
   amount!: number;
 
@@ -20,17 +20,13 @@ export class WalletBalance implements DoCheck{
     if (this.userData?.phoneNumber) {
       this.userService.getWalletBalance(this.userData.phoneNumber).subscribe(
         (response) => {
-          if(response.response === "Record fetched Successfully !!"){
-            console.log("Wallet Response: ",response.result.amount);
+          if (response.response === "Record fetched Successfully !!") {
+            console.log("Wallet Response: ", response.result.amount);
             this.amount = response.result.amount;
-            console.log("Wallet Response amount: ",this.amount);
+            console.log("Wallet Response amount: ", this.amount);
           } else {
             alert("Error Fetching User Amount")
           }
-        }, 
-        (error) => {
-          console.log("Wallet Balance Fetcing Error: ",error);
-          alert("Failde to fetch walletBalance");
         }
       )
     }
@@ -38,7 +34,4 @@ export class WalletBalance implements DoCheck{
       alert("User Not Found.")
     }
   }
-  
-
-  
 }

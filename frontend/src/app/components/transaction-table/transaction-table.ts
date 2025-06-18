@@ -8,11 +8,11 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./transaction-table.css'],
   imports: [CommonModule]
 })
-export class TransactionTable implements OnInit { 
+export class TransactionTable implements OnInit {
   data!: TransactionsResponse;
   userData: any;
 
-  constructor(private userService: UserServices) {}
+  constructor(private userService: UserServices) { }
 
   ngOnInit(): void {
     const data = sessionStorage.getItem("userData");
@@ -20,7 +20,7 @@ export class TransactionTable implements OnInit {
 
     if (this.userData?.phoneNumber) {
       this.userService.getTransactions(this.userData.phoneNumber).subscribe(
-        (response) => {
+        response => {
           if (response.response === "History fetched successfully") {
             this.data = response;
             console.log("History fetched successfully", this.data.result);
@@ -28,17 +28,13 @@ export class TransactionTable implements OnInit {
             alert("Error fetching history: " + response.response);
           }
         },
-        (error) => {
-          console.error("Transaction fetch error:", error);
-          alert("Failed to fetch transactions.");
-        }
       );
     } else {
       alert("User phone number not found in session.");
     }
   }
 
-  
+
   deleteAllTransactions() {
     if (this.userData?.phoneNumber) {
       console.log(this.userData)
@@ -52,37 +48,37 @@ export class TransactionTable implements OnInit {
             alert("Error Deleting History" + response.response);
           }
         },
-        (error) => {
-          console.log("Error Deleting Transaction History", error)
-          alert("Failed to Delete Transaction History")
-        }
       )
-    }  else {
+    } else {
       alert("User phone number not found in session.");
     }
-  } 
+  }
 
   deleteTransaction(tid: number) {
-    console.log("delete Transactioin",tid)
-    if(tid){
+    console.log("delete Transactioin", tid)
+    if (tid) {
       this.userService.deleteTransaction(tid).subscribe(
         (response) => {
-          if(response.response === "Transaction record deleted"){
+          if (response.response === "Transaction record deleted") {
             this.data = response;
-            console.log("History deleted of Id: ",tid);
-            alert("history of id:"+ tid + "deleted")
+            console.log("History deleted of Id: ", tid);
+            alert("history of id:" + tid + "deleted")
           } else {
             alert("Error Deleting History" + response.response);
           }
         },
-         (error) => {
-          console.log("Error Deleting Transaction History", error)
-          alert("Failed to Delete Transaction History")
-        }
       )
     } else {
-      console.log("tid",tid)
+      console.log("tid", tid)
       alert("Transaction not found.");
     }
+  }
+
+  deleteTran(tid: number) {
+    this.userService.deleteTransaction(tid).subscribe((data) =>{
+      console.log("New single delete function:",data.response)
+    },
+    
+  )
   }
 }

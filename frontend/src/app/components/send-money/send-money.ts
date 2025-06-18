@@ -5,19 +5,18 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-send-money',
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './send-money.html',
   styleUrl: './send-money.css'
 })
 export class SendMoney {
   userData: any;
   usersList: any;
-  array = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
   sendMoneyModel: SendMoneyModel = new SendMoneyModel();
 
-  constructor(private userService: UserServices) {}
+  constructor(private userService: UserServices) { }
 
-  
+
   ngOnInit(): void {
     const data = sessionStorage.getItem("userData");
     this.userData = data ? JSON.parse(data) : null;
@@ -27,32 +26,27 @@ export class SendMoney {
 
     this.userService.getUserBasicList().subscribe(
       (response) => {
-        if(response.response === "Balance fetched Successfully !!"){
+        if (response.response === "Balance fetched Successfully !!") {
           this.usersList = response.result;
-            // console.log("Users List Fetched successfully In SendMoney", this.usersList);
-          } else {
-            alert("Error fetching UsersList: " + response.response);
+          // console.log("Users List Fetched successfully In SendMoney", this.usersList);
+        } else {
+          alert("Error fetching UsersList: " + response.response);
         }
-      }, 
-      (error) => {
-         console.error("UserList Fetching error:", error);
-          alert("Failed to Fetch Users List.");
-      }
+      },
     )
 
   }
   data: any;
 
-  onSubmit(){
+  onSubmit() {
     this.userService.sendMoney(this.sendMoneyModel).subscribe((data) => {
-      if(data.response === "Amount transfered successfully") {
+      if (data.response === "Amount transfered successfully") {
         alert("Money Send Successfully")
         console.log(data.response)
       }
-      else{
+      else {
         alert(data.response);
       }
     })
   }
-
 }

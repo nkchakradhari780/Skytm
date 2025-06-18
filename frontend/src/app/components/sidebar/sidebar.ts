@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,9 +10,17 @@ import { RouterLink } from '@angular/router';
 export class Sidebar implements OnInit {
   userData: any;
 
+  constructor(private router: Router){}
+
   ngOnInit(): void {
     const data = sessionStorage.getItem("userData");
     this.userData = data ? JSON.parse(data) : null;
     console.log(this.userData);
+  }
+
+  Logout(){
+    console.log("Loging Out")
+    sessionStorage.removeItem("userData");
+    this.router.navigate([''])
   }
 }

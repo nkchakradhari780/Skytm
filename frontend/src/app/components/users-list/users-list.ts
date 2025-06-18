@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { UserBasicListResponse, UserServices } from '../../services/user-services';
+import { UserServices } from '../../services/user-services';
 
 @Component({
   selector: 'app-users-list',
@@ -13,7 +13,7 @@ export class UsersList {
 
   users: any[] = [];
 
-  ngOnInit(): void {
+  ngOnInit(){
     this.userService.getUserBasicList().subscribe(
       (response) => {
         if(response.response === "Balance fetched Successfully !!"){
@@ -22,10 +22,6 @@ export class UsersList {
           } else {
             alert("Error fetching UsersList: " + response.response);
         }
-      }, 
-      (error) => {
-         console.error("UserList Fetching error:", error);
-          alert("Failed to Fetch Users List.");
       }
     )
   }
