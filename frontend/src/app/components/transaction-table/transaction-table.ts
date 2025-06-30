@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { TransactionsResponse, UserServices } from '../../services/user-services';
 import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-transaction-table',
   templateUrl: './transaction-table.html',
   styleUrls: ['./transaction-table.css'],
-  imports: [CommonModule]
+  imports: [CommonModule,TableModule]
 })
 export class TransactionTable implements OnInit {
   data!: TransactionsResponse;
   userData: any;
+  transactions: any;
 
   constructor(private userService: UserServices) { }
 
@@ -23,6 +25,7 @@ export class TransactionTable implements OnInit {
         response => {
           if (response.response === "History fetched successfully") {
             this.data = response;
+            this.transactions = this.data.result;
             console.log("History fetched successfully", this.data.result);
           } else {
             alert("Error fetching history: " + response.response);

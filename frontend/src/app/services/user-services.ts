@@ -12,11 +12,11 @@ export class UserServices {
   constructor(private http: HttpClient) { }
 
   signupUser(data: AddUser): Observable<Response> {
-    return this.http.post<Response>('https://skytm-api.azurewebsites.net/api/Auth/signup', data);
+    return this.http.post<Response>('https://localhost:7262/api/Auth/Register', data);
   }
 
   loginUser(data: SigninUser): Observable<Response> {
-    return this.http.post<Response>('https://skytm-api.azurewebsites.net/api/Auth/login', data)
+    return this.http.post<Response>('https://localhost:7262/api/Auth/login', data)
   }
 
   addToWallet(data: Tmodel): Observable<Tresponse> {

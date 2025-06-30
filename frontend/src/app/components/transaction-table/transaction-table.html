@@ -1,35 +1,43 @@
 <div class="card bg-dark text-light mb-4 p-3 border border-secondary">
   <div class="d-flex justify-content-between align-items-center mb-2">
     <h5 class="mb-0">Latest Transactions</h5>
-    <button class="btn btn-sm btn-danger" (click)="deleteAllTransactions()" >Delete All</button>
+    <button class="btn btn-sm btn-danger" (click)="deleteAllTransactions()">
+      Delete All
+    </button>
   </div>
 
-  <table class="table table-dark table-striped mb-0">
-    <thead>
-      <tr>
-        <th>Receiver Name</th>
-        <th>Transaction ID</th>
-        <th>Transaction Type</th>
-        <th>Date</th>
-        <th>Transfer Amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let tr of data?.result">
-        <td>{{ tr.receiverName }}</td>
-        <td>{{ tr.transactionId }}</td>
-        <td>{{ tr.transactionType }}</td>
-        <td>{{ tr.transactionDate }}</td>
-        <td>₹{{ tr.transferAmount }}</td>
-        <button class="btn btn-sm btn-danger" (click)="deleteTransaction(tr.transactionId)" >Delete</button>
-      </tr>
-      <tr *ngIf="data?.result?.length === 0">
-        <td colspan="5" class="text-center text-warning">No Transactions Found</td>
-      </tr>
-    </tbody>
-  </table>
+<p-table
+  [value]="transactions"
+  [paginator]="true"
+  [rows]="6"
+  [tableStyle]="{ 'min-width': '50rem' }"
+  [rowsPerPageOptions]="[5, 10, 20]"
+>
+  <ng-template #header>
+    <tr>
+      <th>Receiver Name</th>
+      <th>Transaction ID</th>
+      <th>Transaction Type</th>
+      <th>Date</th>
+      <th>Transfer Amount</th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-data>
+    <tr>
+       <td>{{ data.receiverName }}</td>
+        <td>{{data.transactionId }}</td>
+        <td>{{ data.transactionType }}</td>
+        <td>{{ data.transactionDate }}</td>
+        <td>₹{{data.transferAmount }}</td>
+        <button
+          class="btn btn-sm btn-danger"
+          (click)="deleteTransaction(data.transactionId)"
+        >
+          Delete
+        </button>
+    </tr>
+  </ng-template>
+</p-table>
+
 </div>
-
-
-
-
